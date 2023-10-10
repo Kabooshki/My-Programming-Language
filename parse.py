@@ -5,7 +5,7 @@ class Parser:
         self.token = self.tokens[self.index]
     
     def factor(self):
-        if self.token.type == "INT" or self.token.type =- "FLT":
+        if self.token.type == "INT" or self.token.type == "FLT":
             return self.token
         
     def term(self):
