@@ -1,5 +1,6 @@
 class Lexer:
     digits = "0123456789"
+    operations = "+-/*%"
     
     def __init__(self, text):
         self.text = text
@@ -12,6 +13,10 @@ class Lexer:
             while self.index < len(self.text):
                 if self.currentChar in Lexer.digits:
                     self.token = self.extract_number()
+                elif self.char in Lexer.operations:
+                    self.token = Operation(extract_number())
+                
+            return self.token
         
         def extract_number(self):
             number = ""
@@ -22,7 +27,7 @@ class Lexer:
                 number += self.currentChar
                 self.next()
             
-            return Integer("INT", number)
+            return Integer(number) if not isFloat else Float(number)
         
         def next(self):
             if self.index < len(self.text):
@@ -38,4 +43,9 @@ class Integer(Token):
         super().__init__("INT", value)
 
 class Float(Token):
-    pass
+    def __init__(self, value):
+        super().__init__("FLT", value)
+        
+class Operation(Token):
+    def __init__(self,value):
+        super().__init__("OP", value)
