@@ -1,5 +1,6 @@
 from lexer import Lexer
 from parse import Parser
+from interpreter import Interpreter
 
 while True:
     userInput = input("HoepfnerScript: ")
@@ -10,4 +11,7 @@ while True:
     parser = Parser(tokens)
     tree = parser.parse()
     
-    print(tree)
+    Interpreter = Interpreter(tree)
+    result = Interpreter.interpret()
+    
+    print(result)
